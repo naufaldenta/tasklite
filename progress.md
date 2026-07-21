@@ -94,6 +94,9 @@
   - Membuat Dockerfile dengan Python slim, instalasi dependency, source code, port, user non-root, dan Gunicorn.
   - Menambahkan `.dockerignore` untuk menjaga secret, cache, dokumen, dan artefak lokal di luar build context.
   - Menjalankan audit tujuh elemen Dockerfile dan regression test aplikasi.
+  - Membuat Compose dua service dengan network, `depends_on`, restart policy, health check database, dan named volume.
+  - Menambahkan `.env.example` untuk repository serta `.env` lokal yang sudah dikonfirmasi diabaikan Git.
+  - Menjalankan audit delapan elemen Compose dan regression test aplikasi.
 - Files created/modified:
   - `app/__init__.py` dan `app/models.py` (created/updated)
   - `.gitignore`, `task_plan.md`, dan `progress.md` (updated)
@@ -114,6 +117,9 @@
 | Automated CRUD tests | `pytest -q` | Minimal lima test lulus | 5 passed in 0.88s | Pass |
 | Dockerfile structural audit | 7 elemen wajib | Semua elemen tersedia | 7/7 lulus | Pass |
 | Regression after Dockerfile | `pytest -q` | Semua test tetap lulus | 5 passed in 0.67s | Pass |
+| Compose structural audit | 8 elemen wajib | Dua service, port, network, dependency, restart, volume, dan health tersedia | 8/8 lulus | Pass |
+| Environment secret check | `git check-ignore .env` | `.env` diabaikan Git | Aturan `.gitignore` terdeteksi | Pass |
+| Regression after Compose | `pytest -q` | Semua test tetap lulus | 5 passed in 0.61s | Pass |
 
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |
