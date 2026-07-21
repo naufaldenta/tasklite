@@ -26,6 +26,9 @@
 - Microsoft mendokumentasikan instalasi WSL dari PowerShell Administrator menggunakan `wsl --install`, kemudian restart; WSL baru memakai versi 2 secara default.
 - Docker Compose tidak menunggu database benar-benar siap hanya karena container berjalan. `depends_on` dengan `condition: service_healthy` membuat aplikasi menunggu health check database lulus.
 - GitHub Actions workflow disimpan sebagai YAML di `.github/workflows` dan dapat dipicu oleh push/pull request.
+- Docker CLI belum tersedia di mesin lokal saat implementasi dimulai; container build/Compose tidak dapat diverifikasi sampai Docker Desktop dipasang.
+- Runtime Python 3.12.13 tersedia untuk menjalankan test lewat virtual environment lokal sementara.
+- Dependency terkunci dan berhasil terpasang: Flask 3.1.3, Flask-SQLAlchemy 3.1.1, Psycopg 3.3.4, Gunicorn 26.0.0, dan pytest 9.1.1.
 
 ## Technical Decisions
 | Decision | Rationale |
@@ -44,6 +47,8 @@
 | Issue | Resolution |
 |-------|------------|
 | LibreOffice/`soffice` tidak tersedia untuk renderer DOCX bawaan | Gunakan ekstraksi struktural lengkap dan cek renderer alternatif Microsoft Word |
+| Docker belum terpasang | Implementasi dan unit test dijalankan melalui virtual environment; Docker/Compose diverifikasi secara struktural dan perlu dites lagi setelah Docker Desktop tersedia |
+| Instalasi dependency sempat timeout | Paket sebenarnya sudah selesai terpasang; smoke test dijalankan terpisah dan lulus |
 
 ## Resources
 - `C:\laragon\www\uas_pak_dhendra\Dhendra_Marutho_UAS_Cloud_Computing.docx`
@@ -54,6 +59,10 @@
 - Docker Compose startup order: https://docs.docker.com/compose/how-tos/startup-order/
 - GitHub Actions workflows: https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows
 - GitHub Actions continuous integration: https://docs.github.com/en/actions/get-started/continuous-integration
+- Flask PyPI: https://pypi.org/project/Flask/
+- Flask-SQLAlchemy PyPI: https://pypi.org/project/Flask-SQLAlchemy/
+- Psycopg PyPI: https://pypi.org/project/psycopg/
+- Gunicorn PyPI: https://pypi.org/project/gunicorn/
 
 ## Visual/Browser Findings
 - Page 1: identitas ujian, CPMK, ketentuan A-B, dan komponen wajib 1-5 terbaca utuh.
