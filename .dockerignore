@@ -1,0 +1,15 @@
+.git
+.github
+.venv
+__pycache__
+*.py[cod]
+.pytest_cache
+.env
+instance
+*.db
+_docx_review
+*.docx
+task_plan.md
+findings.md
+progress.md
+RENCANA_PROYEK_UAS.md
