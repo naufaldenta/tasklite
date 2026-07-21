@@ -102,6 +102,8 @@
   - Membuat workflow GitHub Actions: checkout, setup Python, install dependency, pytest, Compose config, Docker build, multi-container smoke test, log gagal, dan cleanup.
   - Memakai `actions/checkout@v6`, `actions/setup-python@v6`, serta permission `contents: read` berdasarkan release resmi.
   - Memvalidasi sintaks YAML workflow dan Compose lalu menjalankan regression test.
+  - Memantau run CI baseline `29830878723`; pytest berhenti dengan exit code 4 sebelum Docker build.
+  - Memperjelas interpreter/target test dan mengamankan step log serta cleanup ketika `.env` belum tersedia.
 - Files created/modified:
   - `app/__init__.py` dan `app/models.py` (created/updated)
   - `.gitignore`, `task_plan.md`, dan `progress.md` (updated)
@@ -145,6 +147,7 @@
 | 2026-07-21 | Patch log gagal karena konteks Phase 7 tidak cocok | 1 | Membaca konteks aktual lalu menerapkan patch terarah |
 | 2026-07-21 | Empat file awal memiliki blank line ekstra di EOF | 1 | Menghapus baris ekstra dan menjalankan ulang `git diff --check` |
 | 2026-07-21 | Patch workflow CI memiliki hunk tidak valid | 1 | Tidak ada file berubah; patch diulang dengan dua hunk yang benar |
+| 2026-07-21 | Run CI baseline `29830878723` gagal pada pytest exit 4 | 1 | Ganti ke `python -m pytest tests -q`; cegah log/cleanup gagal akibat `.env` belum dibuat |
 
 ## 5-Question Reboot Check
 | Question | Answer |
