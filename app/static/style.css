@@ -198,7 +198,8 @@ h1 {
 }
 
 .task-form input,
-.task-form textarea {
+.task-form textarea,
+.task-form select {
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 13px;
@@ -219,8 +220,14 @@ h1 {
   resize: vertical;
 }
 
+.task-form select {
+  min-height: 46px;
+  padding: 0 14px;
+}
+
 .task-form input:focus,
-.task-form textarea:focus {
+.task-form textarea:focus,
+.task-form select:focus {
   border-color: #8cb0ff;
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.18);
 }
@@ -248,6 +255,21 @@ h1 {
   color: var(--primary-dark);
   background: #fff;
   box-shadow: 0 8px 22px rgba(6, 22, 61, 0.22);
+}
+
+.button-secondary {
+  min-height: 38px;
+  border: 1px solid #c8d5eb;
+  color: var(--primary-dark);
+  background: var(--surface-soft);
+  font-size: 0.86rem;
+  text-decoration: none;
+}
+
+.button-ghost {
+  color: var(--muted);
+  background: transparent;
+  text-decoration: none;
 }
 
 .task-section {
@@ -278,11 +300,25 @@ h1 {
 }
 
 .task-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
   padding: 20px;
   border: 1px solid var(--line);
   border-radius: 18px;
   background: var(--surface);
   transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.task-card-main {
+  min-width: 0;
+}
+
+.task-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
 }
 
 .task-card:hover {
@@ -363,6 +399,45 @@ h1 {
   box-shadow: 0 8px 20px rgba(36, 87, 214, 0.12);
 }
 
+.edit-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(28px, 7vw, 72px);
+  padding: clamp(24px, 5vw, 48px);
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.edit-intro h1 {
+  margin-bottom: 14px;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.edit-intro > p:last-child {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.edit-form label span {
+  color: var(--muted);
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.edit-form .button-primary {
+  color: #fff;
+  background: var(--primary);
+  box-shadow: 0 8px 20px rgba(36, 87, 214, 0.24);
+}
+
 .site-footer {
   padding-block: 0 36px;
   color: var(--muted);
@@ -384,6 +459,19 @@ h1 {
 
   .create-panel {
     grid-template-columns: 1fr;
+  }
+
+  .edit-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .task-card {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .task-actions .button {
+    width: 100%;
   }
 
   .task-count {

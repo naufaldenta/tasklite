@@ -22,3 +22,19 @@ def create_task():
     db.session.add(task)
     db.session.commit()
     return redirect(url_for("tasks.index", created="1"))
+
+
+@bp.get("/tasks/<int:task_id>/edit")
+def edit_task(task_id):
+    task = db.get_or_404(Task, task_id)
+    return render_template("edit.html", task=task)
+
+
+@bp.post("/tasks/<int:task_id>/update")
+def update_task(task_id):
+    task = db.get_or_404(Task, task_id)
+    task.title = request.form.get("title", "").strip()
+    task.description = request.form.get("description", "").strip() or None
+    task.status = request.form.get("status", "pending")
+    db.session.commit()
+    return redirect(url_for("tasks.index", updated="1"))

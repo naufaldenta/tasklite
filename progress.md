@@ -86,6 +86,8 @@
   - Memverifikasi empty state dan data task tampil pada HTML.
   - Mengimplementasikan operasi Create dengan form server-rendered, penyimpanan database, redirect, dan notice sukses.
   - Memverifikasi task baru tersimpan dengan status default `pending` dan tampil pada halaman.
+  - Mengimplementasikan operasi Update dengan halaman edit, perubahan detail/status, dan tombol edit responsif.
+  - Memverifikasi record yang sama berubah dari `pending` menjadi `done`.
 - Files created/modified:
   - `app/__init__.py` dan `app/models.py` (created/updated)
   - `.gitignore`, `task_plan.md`, dan `progress.md` (updated)
@@ -101,6 +103,7 @@
 | Database smoke test | SQLite in-memory + model `Task` | Tabel terbentuk dan record dapat disimpan/dibaca | Sesuai harapan | Pass |
 | Read feature smoke test | Database kosong dan satu task | Empty state lalu task tampil pada HTML | Sesuai harapan | Pass |
 | Create feature smoke test | POST judul dan deskripsi valid | Record tersimpan, redirect sukses, dan task tampil | Sesuai harapan | Pass |
+| Update feature smoke test | Edit judul, catatan, dan status | Record lama diperbarui menjadi nilai baru | Sesuai harapan | Pass |
 
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |

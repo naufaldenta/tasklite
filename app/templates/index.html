@@ -18,6 +18,9 @@
   {% if request.args.get("created") %}
     <div class="notice" role="status">Tugas baru berhasil ditambah.</div>
   {% endif %}
+  {% if request.args.get("updated") %}
+    <div class="notice" role="status">Perubahan tugas berhasil disimpan.</div>
+  {% endif %}
 
   <section class="create-panel" aria-labelledby="create-title">
     <div class="form-intro">
@@ -78,6 +81,11 @@
               {% else %}
                 <p class="muted">Tidak ada catatan tambahan.</p>
               {% endif %}
+            </div>
+            <div class="task-actions">
+              <a class="button button-secondary" href="{{ url_for('tasks.edit_task', task_id=task.id) }}">
+                Edit
+              </a>
             </div>
           </article>
         {% endfor %}

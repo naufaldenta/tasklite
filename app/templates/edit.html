@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Tugas · TaskLite{% endblock %}
+
+{% block content %}
+  <section class="edit-shell">
+    <div class="form-intro edit-intro">
+      <p class="eyebrow">Update tugas</p>
+      <h1>Edit seperlunya.</h1>
+      <p>Ubah detail atau tandai tugas sebagai selesai.</p>
+    </div>
+
+    <form
+      class="task-form edit-form"
+      action="{{ url_for('tasks.update_task', task_id=task.id) }}"
+      method="post"
+    >
+      <label for="title">Judul tugas</label>
+      <input
+        id="title"
+        name="title"
+        type="text"
+        minlength="3"
+        maxlength="100"
+        value="{{ task.title }}"
+        required
+      >
+
+      <label for="description">Catatan <span>(opsional)</span></label>
+      <textarea id="description" name="description" maxlength="500" rows="5">{{ task.description or "" }}</textarea>
+
+      <label for="status">Status</label>
+      <select id="status" name="status">
+        <option value="pending" {% if task.status == "pending" %}selected{% endif %}>Belum selesai</option>
+        <option value="done" {% if task.status == "done" %}selected{% endif %}>Selesai</option>
+      </select>
+
+      <div class="form-actions">
+        <a class="button button-ghost" href="{{ url_for('tasks.index') }}">Batal</a>
+        <button class="button button-primary" type="submit">Simpan perubahan</button>
+      </div>
+    </form>
+  </section>
+{% endblock %}
