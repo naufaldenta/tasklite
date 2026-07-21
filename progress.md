@@ -115,6 +115,8 @@
   - Menghapus secret hard-coded yang tidak digunakan, memakai `URL.create`, dan mengaktifkan `pool_pre_ping` untuk recovery koneksi.
   - Menyusun README lengkap untuk instalasi Windows 11, menjalankan Compose, pengujian, persistent volume, recovery, CI/CD, dan troubleshooting.
   - Menjalankan audit akhir: 9 test lulus, YAML Compose/workflow valid, Dockerfile valid, dan tidak ada whitespace error.
+  - Mendesain ulang UI dengan warna solid, tipografi sistem/editorial, border tipis, radius kecil, dan tanpa efek gradient atau blur.
+  - Merapikan copy antarmuka, header, formulir, daftar tugas, status, empty state, serta halaman edit tanpa mengubah alur CRUD.
 - Files created/modified:
   - `app/__init__.py` dan `app/models.py` (created/updated)
   - `.gitignore`, `task_plan.md`, dan `progress.md` (updated)
@@ -151,6 +153,9 @@
 | Environment URL test | Credential dengan spasi dan karakter khusus | URL PostgreSQL mempertahankan nilai dengan aman | Sesuai harapan | Pass |
 | Regression after config refactor | `pytest -q` | Semua test tetap lulus | 9 passed in 1.39s | Pass |
 | Final documentation audit | pytest, PyYAML, Dockerfile, `git diff --check` | Seluruh pemeriksaan lulus | 9 passed; YAML/Dockerfile/whitespace valid | Pass |
+| UI redesign regression | `pytest tests -q` | Seluruh fitur tetap lulus | 9 passed in 0.98s | Pass |
+| Non-gradient CSS audit | Pencarian `gradient` dan `backdrop-filter` | Tidak ada efek dekoratif tersebut | Tidak ditemukan | Pass |
+| Redesigned page render | Flask test client | Copy dan header baru tampil | Sesuai harapan | Pass |
 
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |
@@ -174,8 +179,8 @@
 ## 5-Question Reboot Check
 | Question | Answer |
 |----------|--------|
-| Where am I? | Implementasi dan dokumentasi TaskLite selesai |
+| Where am I? | Implementasi, dokumentasi, dan redesign UI TaskLite selesai |
 | Where am I going? | Menyerahkan proyek dan panduan demonstrasi kepada pengguna |
 | What's the goal? | Proyek CRUD multi-container UAS yang ringan dan siap dijalankan di Windows 11 |
 | What have I learned? | Lihat findings.md |
-| What have I done? | Menelaah UAS, membuat aplikasi CRUD, Docker Compose, test, CI/CD, dan dokumentasi lengkap |
+| What have I done? | Menelaah UAS, membuat aplikasi CRUD, Docker Compose, test, CI/CD, dokumentasi, dan UI sederhana tanpa gradient |

@@ -6,13 +6,13 @@
   {% set entered = form_data|default({}) %}
   <section class="hero">
     <div>
-      <p class="eyebrow">Dashboard tugas</p>
-      <h1>Yang perlu kamu selesaikan.</h1>
-      <p class="hero-copy">Satu tempat sederhana buat nyatet dan mantau tugas.</p>
+      <p class="eyebrow">Daftar kerja</p>
+      <h1>Catat tugas, lalu selesaikan satu per satu.</h1>
+      <p class="hero-copy">Aplikasi sederhana untuk menyimpan dan memantau pekerjaan harian.</p>
     </div>
     <div class="task-count" aria-label="Jumlah tugas">
       <strong>{{ tasks|length }}</strong>
-      <span>total tugas</span>
+      <span>tugas tercatat</span>
     </div>
   </section>
 
@@ -31,9 +31,9 @@
 
   <section class="create-panel" aria-labelledby="create-title">
     <div class="form-intro">
-      <p class="eyebrow">Tugas baru</p>
-      <h2 id="create-title">Mau ngerjain apa?</h2>
-      <p>Isi yang penting aja. Detailnya boleh dikosongin.</p>
+      <p class="eyebrow">Tambah data</p>
+      <h2 id="create-title">Tugas baru</h2>
+      <p>Tulis judul pekerjaan dan tambahkan catatan bila diperlukan.</p>
     </div>
 
     <form class="task-form" action="{{ url_for('tasks.create_task') }}" method="post">
@@ -44,7 +44,7 @@
         type="text"
         minlength="3"
         maxlength="100"
-        placeholder="Contoh: Belajar Docker Compose"
+        placeholder="Contoh: Siapkan demo Docker Compose"
         value="{{ entered.get('title', '') }}"
         required
       >
@@ -55,7 +55,7 @@
         name="description"
         maxlength="500"
         rows="3"
-        placeholder="Tambahin detail singkat biar nggak lupa."
+        placeholder="Detail tambahan untuk tugas ini"
       >{{ entered.get('description', '') }}</textarea>
 
       <button class="button button-primary" type="submit">Tambah tugas</button>
@@ -65,15 +65,15 @@
   <section class="task-section" aria-labelledby="task-list-title">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Daftar terbaru</p>
-        <h2 id="task-list-title">Tugas kamu</h2>
+        <p class="eyebrow">Data tersimpan</p>
+        <h2 id="task-list-title">Semua tugas</h2>
       </div>
     </div>
 
     {% if tasks %}
       <div class="task-list">
         {% for task in tasks %}
-          <article class="task-card">
+          <article class="task-card task-card-{{ task.status }}">
             <div class="task-card-main">
               <div class="task-meta">
                 <span class="status status-{{ task.status }}">
@@ -109,7 +109,7 @@
       <div class="empty-state">
         <span class="empty-icon" aria-hidden="true">✓</span>
         <h3>Belum ada tugas</h3>
-        <p>Daftar tugas masih kosong. Nanti tugas baru bakal muncul di sini.</p>
+        <p>Gunakan formulir di atas untuk menambahkan tugas pertama.</p>
       </div>
     {% endif %}
   </section>

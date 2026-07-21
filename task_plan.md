@@ -58,6 +58,14 @@ Complete
 - [x] Commit dan push setiap perubahan besar ke `origin/main`
 - **Status:** complete
 
+### Phase 8: Redesign UI Non-Gradient
+- [x] Ganti visual dekoratif menjadi gaya aplikasi utilitas yang sederhana
+- [x] Hapus gradient, blur, kartu membulat besar, dan bayangan dekoratif
+- [x] Pertahankan layout responsif serta aksesibilitas form
+- [x] Jalankan regression test dan audit CSS
+- [x] Commit serta push redesign ke `origin/main`
+- **Status:** complete
+
 ## Key Questions
 1. Apa saja ketentuan rinci pada dokumen Word yang belum muncul dalam deskripsi pengguna?
 2. Stack apa yang paling ringan tetapi tetap menunjukkan aplikasi, database, Docker Compose, volume, environment variable, health check, automated testing, dan CI/CD?
