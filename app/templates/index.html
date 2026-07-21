@@ -21,6 +21,9 @@
   {% if request.args.get("updated") %}
     <div class="notice" role="status">Perubahan tugas berhasil disimpan.</div>
   {% endif %}
+  {% if request.args.get("deleted") %}
+    <div class="notice" role="status">Tugas berhasil dihapus.</div>
+  {% endif %}
 
   <section class="create-panel" aria-labelledby="create-title">
     <div class="form-intro">
@@ -86,6 +89,13 @@
               <a class="button button-secondary" href="{{ url_for('tasks.edit_task', task_id=task.id) }}">
                 Edit
               </a>
+              <form
+                action="{{ url_for('tasks.delete_task', task_id=task.id) }}"
+                method="post"
+                onsubmit="return confirm('Hapus tugas ini?')"
+              >
+                <button class="button button-danger" type="submit">Hapus</button>
+              </form>
             </div>
           </article>
         {% endfor %}

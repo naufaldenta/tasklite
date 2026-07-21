@@ -38,3 +38,11 @@ def update_task(task_id):
     task.status = request.form.get("status", "pending")
     db.session.commit()
     return redirect(url_for("tasks.index", updated="1"))
+
+
+@bp.post("/tasks/<int:task_id>/delete")
+def delete_task(task_id):
+    task = db.get_or_404(Task, task_id)
+    db.session.delete(task)
+    db.session.commit()
+    return redirect(url_for("tasks.index", deleted="1"))

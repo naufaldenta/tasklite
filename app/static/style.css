@@ -266,6 +266,14 @@ h1 {
   text-decoration: none;
 }
 
+.button-danger {
+  min-height: 38px;
+  border: 1px solid #f2c4c4;
+  color: #a72d2d;
+  background: #fff1f1;
+  font-size: 0.86rem;
+}
+
 .button-ghost {
   color: var(--muted);
   background: transparent;
@@ -319,6 +327,10 @@ h1 {
   display: flex;
   flex: 0 0 auto;
   gap: 8px;
+}
+
+.task-actions form {
+  margin: 0;
 }
 
 .task-card:hover {
@@ -472,6 +484,10 @@ h1 {
 
   .task-actions .button {
     width: 100%;
+  }
+
+  .task-actions form {
+    flex: 1;
   }
 
   .task-count {
