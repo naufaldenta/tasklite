@@ -31,6 +31,7 @@
 - Dependency terkunci dan berhasil terpasang: Flask 3.1.3, Flask-SQLAlchemy 3.1.1, Psycopg 3.3.4, Gunicorn 26.0.0, dan pytest 9.1.1.
 - Release resmi saat implementasi menunjukkan `actions/checkout@v6` dan `actions/setup-python@v6` sebagai major version terkini; workflow memakai permission minimum `contents: read`.
 - Bukti CI: baseline hijau pada run `29831059597`; kegagalan validasi terkontrol pada run `29831220206` setelah test membuktikan server menerima judul kosong.
+- Bukti perbaikan CI: run `29831388768` berhasil setelah validasi server diterapkan; seluruh test, build, Compose, health smoke test, dan cleanup lulus.
 
 ## Technical Decisions
 | Decision | Rationale |
@@ -73,3 +74,7 @@
 - Page 2: komponen testing/CI-CD, analisis, nilai tambahan, luaran, struktur laporan, video, serta bukti wajib 1-7 terbaca utuh.
 - Page 3: bukti wajib 8-10, tabel rubrik 100%, format pengumpulan, dan catatan penting terbaca utuh.
 - Tidak ada clipping/overlap yang mengaburkan isi; nomor halaman sesuai 1-3.
+- TaskLite desktop tampil rapi: hierarchy judul jelas, create panel kontras, form terbaca, count card dan notice tidak overlap.
+- Browser QA berhasil melakukan Create dan Update; task tampil, deskripsi berubah, dan status menjadi `Selesai`.
+- Breakpoint mobile 390x844 tersusun satu kolom tanpa overflow horizontal atau elemen terpotong.
+- Interaksi Delete via dialog konfirmasi tidak selesai melalui browser controller setelah dua metode; fungsi Delete tetap lulus automated test.

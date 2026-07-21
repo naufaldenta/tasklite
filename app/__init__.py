@@ -2,6 +2,7 @@ import os
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import URL
 
 
 db = SQLAlchemy()
@@ -16,9 +17,16 @@ def _database_url():
         user = os.getenv("POSTGRES_USER", "tasklite")
         password = os.getenv("POSTGRES_PASSWORD", "tasklite")
         host = os.getenv("DB_HOST", "db")
-        port = os.getenv("DB_PORT", "5432")
+        port = int(os.getenv("DB_PORT", "5432"))
         name = os.getenv("POSTGRES_DB", "tasklite")
-        return f"postgresql+psycopg://{user}:{password}@{host}:{port}/{name}"
+        return URL.create(
+            "postgresql+psycopg",
+            username=user,
+            password=password,
+            host=host,
+            port=port,
+            database=name,
+        )
 
     return "sqlite:///tasklite.db"
 
@@ -27,8 +35,8 @@ def create_app(test_config=None):
     """Membuat instance aplikasi TaskLite."""
     app = Flask(__name__)
     app.config.from_mapping(
-        SECRET_KEY="dev-only-key",
         SQLALCHEMY_DATABASE_URI=_database_url(),
+        SQLALCHEMY_ENGINE_OPTIONS={"pool_pre_ping": True},
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
     )
 

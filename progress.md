@@ -109,6 +109,10 @@
   - Memverifikasi run GitHub Actions `29831220206` gagal sesuai rencana pada test judul kosong.
   - Mengimplementasikan validasi server untuk judul, panjang deskripsi, dan whitelist status dengan HTTP 400.
   - Menjaga nilai input tetap tampil ketika validasi gagal serta menambah dua test validasi tambahan.
+  - Memverifikasi run perbaikan `29831388768` selesai sukses pada seluruh step CI.
+  - Menjalankan browser QA desktop dan mobile 390x844; layout tidak overlap/overflow.
+  - Menjalankan Create serta Update lewat browser dan memverifikasi task/status berubah.
+  - Menghapus secret hard-coded yang tidak digunakan, memakai `URL.create`, dan mengaktifkan `pool_pre_ping` untuk recovery koneksi.
 - Files created/modified:
   - `app/__init__.py` dan `app/models.py` (created/updated)
   - `.gitignore`, `task_plan.md`, dan `progress.md` (updated)
@@ -140,6 +144,10 @@
 | Controlled validation failure | POST judul spasi | Test mengharapkan 400 sebelum validasi ada | 302 diterima; 1 failed, 6 passed | Expected fail |
 | Controlled GitHub Actions failure | Run `29831220206` | Pipeline gagal pada test validasi | Conclusion failure | Expected fail |
 | Validation fix tests | `pytest -q` | Seluruh CRUD, health, dan validasi lulus | 9 passed in 1.50s | Pass |
+| CI validation fix success | Run `29831388768` | Pipeline hijau setelah perbaikan | Conclusion success | Pass |
+| Browser QA desktop/mobile | Create, Update, 390x844 | UI responsif dan interaksi berhasil | Create/Update pass; layout rapi | Pass |
+| Environment URL test | Credential dengan spasi dan karakter khusus | URL PostgreSQL mempertahankan nilai dengan aman | Sesuai harapan | Pass |
+| Regression after config refactor | `pytest -q` | Semua test tetap lulus | 9 passed in 1.39s | Pass |
 
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |
@@ -157,6 +165,8 @@
 | 2026-07-21 | Empat file awal memiliki blank line ekstra di EOF | 1 | Menghapus baris ekstra dan menjalankan ulang `git diff --check` |
 | 2026-07-21 | Patch workflow CI memiliki hunk tidak valid | 1 | Tidak ada file berubah; patch diulang dengan dua hunk yang benar |
 | 2026-07-21 | Run CI baseline `29830878723` gagal pada pytest exit 4 | 1 | Ganti ke `python -m pytest tests -q`; cegah log/cleanup gagal akibat `.env` belum dibuat |
+| 2026-07-21 | `Start-Process` untuk server QA ditolak kebijakan tool | 1 | Gunakan sesi foreground terkelola untuk Flask local server |
+| 2026-07-21 | Browser Delete tersendat pada confirm dialog | 2 | Stop retry; Delete sudah diverifikasi lewat automated test |
 
 ## 5-Question Reboot Check
 | Question | Answer |
