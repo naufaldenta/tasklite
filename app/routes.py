@@ -1,10 +1,23 @@
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import Blueprint, jsonify, redirect, render_template, request, url_for
+from sqlalchemy import text
+from sqlalchemy.exc import SQLAlchemyError
 
 from app import db
 from app.models import Task
 
 
 bp = Blueprint("tasks", __name__)
+
+
+@bp.get("/health")
+def health():
+    try:
+        db.session.execute(text("SELECT 1"))
+    except SQLAlchemyError:
+        db.session.rollback()
+        return jsonify(status="unhealthy", database="unavailable"), 503
+
+    return jsonify(status="healthy", database="connected")
 
 
 @bp.get("/")

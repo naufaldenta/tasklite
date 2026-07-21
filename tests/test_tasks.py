@@ -17,6 +17,13 @@ def test_index_shows_empty_state(client):
     assert b"Belum ada tugas" in response.data
 
 
+def test_health_returns_database_status(client):
+    response = client.get("/health")
+
+    assert response.status_code == 200
+    assert response.get_json() == {"status": "healthy", "database": "connected"}
+
+
 def test_create_task(client, app):
     response = client.post(
         "/tasks",
