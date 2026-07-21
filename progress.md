@@ -84,6 +84,8 @@
   - Memverifikasi pembuatan tabel serta insert/read record pada SQLite in-memory.
   - Mengimplementasikan operasi Read dengan blueprint, template daftar, empty state, dan CSS responsif lokal.
   - Memverifikasi empty state dan data task tampil pada HTML.
+  - Mengimplementasikan operasi Create dengan form server-rendered, penyimpanan database, redirect, dan notice sukses.
+  - Memverifikasi task baru tersimpan dengan status default `pending` dan tampil pada halaman.
 - Files created/modified:
   - `app/__init__.py` dan `app/models.py` (created/updated)
   - `.gitignore`, `task_plan.md`, dan `progress.md` (updated)
@@ -98,6 +100,7 @@
 | Flask skeleton smoke test | `GET /` | HTTP 200 dan teks `TaskLite siap` | Sesuai harapan | Pass |
 | Database smoke test | SQLite in-memory + model `Task` | Tabel terbentuk dan record dapat disimpan/dibaca | Sesuai harapan | Pass |
 | Read feature smoke test | Database kosong dan satu task | Empty state lalu task tampil pada HTML | Sesuai harapan | Pass |
+| Create feature smoke test | POST judul dan deskripsi valid | Record tersimpan, redirect sukses, dan task tampil | Sesuai harapan | Pass |
 
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |

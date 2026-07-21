@@ -15,6 +15,42 @@
     </div>
   </section>
 
+  {% if request.args.get("created") %}
+    <div class="notice" role="status">Tugas baru berhasil ditambah.</div>
+  {% endif %}
+
+  <section class="create-panel" aria-labelledby="create-title">
+    <div class="form-intro">
+      <p class="eyebrow">Tugas baru</p>
+      <h2 id="create-title">Mau ngerjain apa?</h2>
+      <p>Isi yang penting aja. Detailnya boleh dikosongin.</p>
+    </div>
+
+    <form class="task-form" action="{{ url_for('tasks.create_task') }}" method="post">
+      <label for="title">Judul tugas</label>
+      <input
+        id="title"
+        name="title"
+        type="text"
+        minlength="3"
+        maxlength="100"
+        placeholder="Contoh: Belajar Docker Compose"
+        required
+      >
+
+      <label for="description">Catatan <span>(opsional)</span></label>
+      <textarea
+        id="description"
+        name="description"
+        maxlength="500"
+        rows="3"
+        placeholder="Tambahin detail singkat biar nggak lupa."
+      ></textarea>
+
+      <button class="button button-primary" type="submit">Tambah tugas</button>
+    </form>
+  </section>
+
   <section class="task-section" aria-labelledby="task-list-title">
     <div class="section-heading">
       <div>
