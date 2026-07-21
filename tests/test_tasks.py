@@ -39,6 +39,17 @@ def test_create_task(client, app):
         assert task.status == "pending"
 
 
+def test_create_rejects_blank_title(client, app):
+    response = client.post(
+        "/tasks",
+        data={"title": "   ", "description": "Tidak boleh tersimpan"},
+    )
+
+    assert response.status_code == 400
+    with app.app_context():
+        assert db.session.execute(db.select(Task)).scalars().all() == []
+
+
 def test_edit_page_shows_existing_task(client, app):
     task_id = add_task(app, title="Judul lama")
 

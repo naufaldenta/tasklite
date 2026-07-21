@@ -104,6 +104,8 @@
   - Memvalidasi sintaks YAML workflow dan Compose lalu menjalankan regression test.
   - Memantau run CI baseline `29830878723`; pytest berhenti dengan exit code 4 sebelum Docker build.
   - Memperjelas interpreter/target test dan mengamankan step log serta cleanup ketika `.env` belum tersedia.
+  - Memverifikasi retry CI `29831059597` berhasil pada seluruh step, termasuk Docker build dan smoke test multi-container.
+  - Menambahkan test server-side judul kosong sebelum implementasi validasi sebagai kegagalan terkontrol UAS.
 - Files created/modified:
   - `app/__init__.py` dan `app/models.py` (created/updated)
   - `.gitignore`, `task_plan.md`, dan `progress.md` (updated)
@@ -131,6 +133,8 @@
 | Dual healthcheck audit | Dockerfile + Compose | App dan database punya mekanisme health check | Keduanya terdeteksi | Pass |
 | CI and Compose YAML audit | PyYAML | Kedua file valid YAML dan struktur utama tersedia | Sesuai harapan | Pass |
 | Regression before CI push | `pytest -q` | Semua test lulus | 6 passed in 0.91s | Pass |
+| CI baseline success | Run `29831059597` | Test, build, Compose, smoke test, dan cleanup berhasil | Semua step success | Pass |
+| Controlled validation failure | POST judul spasi | Test mengharapkan 400 sebelum validasi ada | 302 diterima; 1 failed, 6 passed | Expected fail |
 
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |
