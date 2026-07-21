@@ -99,6 +99,9 @@
   - Menjalankan audit delapan elemen Compose dan regression test aplikasi.
   - Menambahkan endpoint `/health` dengan query `SELECT 1` serta respons JSON 200/503.
   - Menambahkan Dockerfile `HEALTHCHECK` dan automated test status database.
+  - Membuat workflow GitHub Actions: checkout, setup Python, install dependency, pytest, Compose config, Docker build, multi-container smoke test, log gagal, dan cleanup.
+  - Memakai `actions/checkout@v6`, `actions/setup-python@v6`, serta permission `contents: read` berdasarkan release resmi.
+  - Memvalidasi sintaks YAML workflow dan Compose lalu menjalankan regression test.
 - Files created/modified:
   - `app/__init__.py` dan `app/models.py` (created/updated)
   - `.gitignore`, `task_plan.md`, dan `progress.md` (updated)
@@ -124,6 +127,8 @@
 | Regression after Compose | `pytest -q` | Semua test tetap lulus | 5 passed in 0.61s | Pass |
 | Health endpoint tests | `pytest -q` | CRUD dan health lulus | 6 passed in 0.74s | Pass |
 | Dual healthcheck audit | Dockerfile + Compose | App dan database punya mekanisme health check | Keduanya terdeteksi | Pass |
+| CI and Compose YAML audit | PyYAML | Kedua file valid YAML dan struktur utama tersedia | Sesuai harapan | Pass |
+| Regression before CI push | `pytest -q` | Semua test lulus | 6 passed in 0.91s | Pass |
 
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |
@@ -139,6 +144,7 @@
 | 2026-07-21 | Instalasi dependency `.venv` timeout setelah 120 detik | 1 | Paket sudah lengkap; smoke test dipisahkan dan lulus |
 | 2026-07-21 | Patch log gagal karena konteks Phase 7 tidak cocok | 1 | Membaca konteks aktual lalu menerapkan patch terarah |
 | 2026-07-21 | Empat file awal memiliki blank line ekstra di EOF | 1 | Menghapus baris ekstra dan menjalankan ulang `git diff --check` |
+| 2026-07-21 | Patch workflow CI memiliki hunk tidak valid | 1 | Tidak ada file berubah; patch diulang dengan dua hunk yang benar |
 
 ## 5-Question Reboot Check
 | Question | Answer |

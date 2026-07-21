@@ -29,6 +29,7 @@
 - Docker CLI belum tersedia di mesin lokal saat implementasi dimulai; container build/Compose tidak dapat diverifikasi sampai Docker Desktop dipasang.
 - Runtime Python 3.12.13 tersedia untuk menjalankan test lewat virtual environment lokal sementara.
 - Dependency terkunci dan berhasil terpasang: Flask 3.1.3, Flask-SQLAlchemy 3.1.1, Psycopg 3.3.4, Gunicorn 26.0.0, dan pytest 9.1.1.
+- Release resmi saat implementasi menunjukkan `actions/checkout@v6` dan `actions/setup-python@v6` sebagai major version terkini; workflow memakai permission minimum `contents: read`.
 
 ## Technical Decisions
 | Decision | Rationale |
@@ -63,6 +64,8 @@
 - Flask-SQLAlchemy PyPI: https://pypi.org/project/Flask-SQLAlchemy/
 - Psycopg PyPI: https://pypi.org/project/psycopg/
 - Gunicorn PyPI: https://pypi.org/project/gunicorn/
+- actions/checkout releases: https://github.com/actions/checkout/releases
+- actions/setup-python releases: https://github.com/actions/setup-python/releases
 
 ## Visual/Browser Findings
 - Page 1: identitas ujian, CPMK, ketentuan A-B, dan komponen wajib 1-5 terbaca utuh.

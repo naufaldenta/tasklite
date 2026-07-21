@@ -24,6 +24,7 @@ services:
       start_period: 10s
 
   app:
+    image: tasklite-app:local
     build:
       context: .
       dockerfile: Dockerfile
