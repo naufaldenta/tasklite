@@ -362,48 +362,94 @@ Simulasi ini membuktikan dampak kegagalan service, fungsi health check, strategi
 
 ## 11. Strategi Commit
 
-Jangan membuat seluruh proyek dalam satu commit. Riwayat yang disarankan:
+Repository sudah terhubung ke `origin` pada branch `main`. Jangan menunggu seluruh CRUD selesai untuk membuat commit. Setiap satu perubahan besar yang sudah diuji harus langsung di-commit dan di-push agar perkembangan terlihat jelas di GitHub.
 
-1. `docs: add UAS requirements and implementation plan`
-2. `chore: initialize Flask project structure`
-3. `feat: add task list and create operation`
-4. `feat: add update and delete operations`
-5. `chore: add application Dockerfile`
-6. `chore: add PostgreSQL compose service and persistent volume`
-7. `feat: add application and database health checks`
-8. `test: add baseline endpoint and CRUD tests`
-9. `ci: add test and Docker build workflow`
-10. `test: expose missing blank-title validation` - run ini sengaja gagal.
-11. `fix: reject blank task titles` - run berikutnya harus berhasil.
-12. `docs: add demo evidence and final README`
+### Format commit message
 
-Setelah repository GitHub kosong dibuat melalui antarmuka GitHub:
+Gunakan format berikut:
 
-```powershell
-git init
-git branch -M main
-git add .
-git commit -m "docs: add UAS requirements and implementation plan"
-git remote add origin https://github.com/USERNAME/tasklite-cloud-uas.git
-git push -u origin main
+```text
+<tipe>: <perubahan singkat dalam bahasa Indonesia>
 ```
 
-Sebelum `git add .`, pastikan `.gitignore` sudah memuat `.env` dan jalankan `git status` untuk memastikan credential tidak ikut staged.
+Prefix ditulis lowercase agar konsisten:
+
+| Prefix | Dipakai untuk | Contoh singkat |
+|---|---|---|
+| `feat:` | Fitur baru | `feat: tambah fitur buat tugas` |
+| `fix:` | Perbaikan bug | `fix: benerin validasi judul kosong` |
+| `refactor:` | Merapikan kode tanpa mengubah fitur | `refactor: rapihin config database` |
+| `remove:` | Menghapus kode atau file yang tidak dipakai | `remove: hapus config lama` |
+| `test:` | Menambah atau mengubah test | `test: tambah test fitur create` |
+| `docs:` | README, planning, atau dokumentasi | `docs: update cara jalanin project` |
+| `ci:` | GitHub Actions atau pipeline | `ci: tambah workflow test dan build` |
+| `chore:` | Setup dan pekerjaan teknis pendukung | `chore: siapin struktur awal flask` |
+
+Deskripsi dibuat nonformal, pendek, dan langsung menyebut hasil perubahan. Hindari pesan umum seperti `update`, `revisi`, `fix bug`, atau `perubahan terbaru` karena tidak menjelaskan isi commit.
+
+### Siklus wajib setiap perubahan besar
+
+1. Kerjakan satu bagian saja, misalnya fitur Create.
+2. Jalankan test yang relevan.
+3. Periksa perubahan dengan `git status` dan `git diff`.
+4. Stage hanya file yang memang terkait perubahan tersebut.
+5. Buat commit dengan pesan singkat berbahasa Indonesia.
+6. Langsung push ke `origin/main`.
+7. Pastikan commit sudah muncul di GitHub sebelum lanjut ke bagian berikutnya.
+
+Contoh alur setelah fitur Create selesai:
+
+```powershell
+docker compose run --rm app pytest -q
+git status
+git diff
+git add app tests
+git commit -m "feat: tambah fitur buat tugas"
+git push origin main
+```
+
+Jangan memakai `git add .` secara otomatis jika ada file lain yang tidak berkaitan. Jangan pernah stage `.env`, credential, screenshot sementara, atau file pribadi.
+
+### Urutan commit dan push yang disarankan
+
+Setiap nomor di bawah adalah satu checkpoint yang langsung di-push:
+
+1. `docs: update planning proyek uas`
+2. `chore: siapin struktur awal flask`
+3. `chore: sambungin app ke database`
+4. `feat: tampilin daftar tugas` - Read.
+5. `feat: tambah fitur buat tugas` - Create.
+6. `test: tambah test fitur create`
+7. `feat: tambah fitur edit tugas` - Update.
+8. `test: tambah test fitur update`
+9. `feat: tambah fitur hapus tugas` - Delete.
+10. `test: tambah test fitur delete`
+11. `chore: tambah dockerfile app`
+12. `chore: tambah compose dan volume database`
+13. `feat: tambah health check app dan database`
+14. `test: tambah test endpoint dan health check`
+15. `ci: tambah workflow test dan build`
+16. `test: buktiin judul kosong masih lolos` - run ini sengaja gagal dan disimpan sebagai bukti.
+17. `fix: benerin validasi judul kosong` - run berikutnya harus berhasil.
+18. `refactor: rapihin config environment`
+19. `docs: lengkapi readme dan bukti demo`
+
+Commit gagal hanya boleh dibuat pada langkah nomor 16 untuk memenuhi bukti pipeline gagal yang terkontrol. Selain tahap tersebut, jangan push perubahan yang belum lulus test. Jangan force-push, squash, atau menghapus run gagal karena riwayatnya dibutuhkan untuk penilaian.
 
 ## 12. Tahapan Pengerjaan
 
 | Fase | Hasil akhir | Kriteria selesai |
 |---|---|---|
 | 1. Environment | WSL 2, Docker Desktop, Compose, Git | Semua perintah versi dan `hello-world` berhasil |
-| 2. Skeleton aplikasi | Flask, template, model, DB config | Halaman dapat dibuka dan schema terbentuk |
-| 3. CRUD | List/create/update/delete + validasi | Semua operasi berjalan melalui browser |
-| 4. Container | Dockerfile dan Compose dua service | Kedua container sehat dan app terhubung DB |
-| 5. Testing | Minimal lima automated test | `pytest -q` lulus lokal |
-| 6. CI/CD | Workflow test, build, smoke test | Satu run gagal terkontrol dan satu run lulus |
+| 2. Skeleton aplikasi | Flask, template, model, DB config | Halaman dapat dibuka, schema terbentuk, lalu commit dan push |
+| 3. CRUD | Create, Read, Update, dan Delete dikerjakan terpisah | Setiap operasi lulus test serta punya commit dan push sendiri |
+| 4. Container | Dockerfile dan Compose dua service | Kedua container sehat, app terhubung DB, lalu commit dan push |
+| 5. Testing | Minimal lima automated test | Setiap kelompok test lulus dan langsung di-commit/push |
+| 6. CI/CD | Workflow test, build, smoke test | Satu run gagal terkontrol dan satu run lulus tersimpan di GitHub |
 | 7. Reliability | Persistensi dan simulasi gangguan | Bukti data tetap ada dan health pulih |
-| 8. Dokumentasi | README, diagram, laporan, slide, video | Semua link dan bukti sesuai format UAS |
+| 8. Dokumentasi | README, diagram, laporan, slide, video | Semua link dan bukti selesai lalu commit/push terakhir |
 
-Urutan ini harus dipertahankan. Nilai tambahan seperti registry baru dipertimbangkan setelah seluruh bukti wajib selesai.
+Urutan ini harus dipertahankan. Pada akhir setiap fase, jalankan `git status` dan pastikan worktree bersih setelah push. Nilai tambahan seperti registry baru dipertimbangkan setelah seluruh bukti wajib selesai.
 
 ## 13. Bukti yang Perlu Dikumpulkan
 
@@ -495,4 +541,3 @@ Proyek siap dikumpulkan hanya jika semua kondisi berikut terpenuhi:
 - Riwayat commit menunjukkan perkembangan.
 - Laporan 10-15 halaman, video 7-10 menit, diagram, dan slide maksimal 8 tersedia.
 - Pengguna mampu menjelaskan setiap komponen tanpa membaca kode secara penuh.
-

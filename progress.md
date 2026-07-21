@@ -56,12 +56,27 @@
   - `.gitignore` (created)
   - `task_plan.md`, `findings.md`, dan `progress.md` (updated)
 
+### Phase 6: Git Workflow Revision
+- **Status:** complete
+- Actions taken:
+  - Memastikan repository sudah terhubung ke `origin` dan branch aktif adalah `main`.
+  - Meninjau strategi commit lama yang masih berbahasa Inggris dan menggabungkan beberapa operasi CRUD.
+  - Mengganti strategi menjadi satu perubahan fungsional per commit dan langsung push.
+  - Memisahkan checkpoint Create, Read, Update, Delete, serta test masing-masing.
+  - Menambahkan tabel prefix dan contoh pesan singkat berbahasa Indonesia nonformal.
+  - Menjaga satu commit gagal terkontrol khusus bukti CI dan melarang push rusak pada tahap lain.
+  - Menjalankan audit sembilan aturan Git; seluruhnya lulus.
+- Files created/modified:
+  - `RENCANA_PROYEK_UAS.md` (updated)
+  - `task_plan.md`, `findings.md`, dan `progress.md` (updated)
+
 ## Test Results
 | Test | Input | Expected | Actual | Status |
 |------|-------|----------|--------|--------|
 | Planning files exist | 3 file paths | Semua file tersedia | Semua file dibuat | Pass |
 | DOCX page review | 3 halaman | Semua ketentuan terbaca | 3 halaman utuh dan terbaca | Pass |
 | Planning requirement audit | 10 kelompok persyaratan | Semua tersedia dalam rencana | 10/10 lulus | Pass |
+| Git workflow revision audit | 9 aturan | Commit/push, CRUD terpisah, prefix, keamanan, dan CI tercakup | 9/9 lulus | Pass |
 
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |
@@ -76,8 +91,8 @@
 ## 5-Question Reboot Check
 | Question | Answer |
 |----------|--------|
-| Where am I? | Planning selesai |
-| Where am I going? | Implementasi proyek setelah pengguna menyetujui rancangan |
+| Where am I? | Planning dan revisi Git workflow selesai |
+| Where am I going? | Implementasi proyek dengan commit/push setelah setiap perubahan besar |
 | What's the goal? | Rencana lengkap proyek CRUD multi-container UAS yang ringan untuk Windows 11 |
 | What have I learned? | Lihat findings.md |
-| What have I done? | Menelaah UAS dan menghasilkan rencana lengkap yang telah diaudit |
+| What have I done? | Menelaah UAS, membuat rencana, dan menetapkan workflow Git granular yang telah diaudit |

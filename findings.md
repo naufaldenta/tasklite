@@ -9,6 +9,9 @@
 - Gunakan persistent volume, environment variable, health check, automated testing, GitHub repository, dan GitHub Actions CI/CD.
 - Kubernetes, VPS, dan layanan cloud berbayar tidak wajib.
 - Repository perlu memiliki riwayat commit yang menunjukkan perkembangan.
+- Repository sekarang sudah terhubung ke `https://github.com/naufaldenta/tasklite.git` pada branch `main`.
+- Setiap perubahan besar, termasuk masing-masing operasi Create, Read, Update, dan Delete, harus langsung diuji, di-commit, lalu di-push.
+- Commit message harus singkat, berbahasa Indonesia nonformal, dan memakai prefix seperti `feat:`, `fix:`, `refactor:`, `remove:`, `test:`, `docs:`, `ci:`, atau `chore:`.
 
 ## Research Findings
 - Dokumen UAS terdiri dari 3 halaman dan seluruh konten utama berada dalam tabel besar; hasil render Microsoft Word terlihat utuh tanpa clipping atau overlap yang menghilangkan ketentuan.
@@ -34,6 +37,8 @@
 | Test endpoint menggunakan SQLite in-memory, lalu smoke test Compose dengan PostgreSQL | Unit/endpoint test cepat sebagai quality gate sebelum build; smoke test membuktikan integrasi container database nyata |
 | Simulasi gangguan dengan menghentikan `db`, mengamati `/health` menjadi 503, lalu memulihkan `db` | Sederhana, aman, mudah dijelaskan, dan membuktikan dampak serta recovery service |
 | Bukti pipeline gagal dibuat dengan pendekatan TDD | Tambahkan test validasi sebelum implementasinya agar kegagalan relevan dan terkontrol, lalu commit perbaikan tanpa menghapus riwayat run |
+| Pisahkan commit CRUD per operasi | Riwayat GitHub dapat memperlihatkan perkembangan Create, Read, Update, dan Delete secara eksplisit |
+| Push segera setelah commit yang sudah diuji | Mengurangi risiko riwayat hanya tersimpan lokal dan membuat bukti perkembangan langsung terlihat di GitHub |
 
 ## Issues Encountered
 | Issue | Resolution |
