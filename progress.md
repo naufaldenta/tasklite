@@ -90,6 +90,7 @@
   - Memverifikasi record yang sama berubah dari `pending` menjadi `done`.
   - Mengimplementasikan operasi Delete dengan route POST, konfirmasi browser, dan notice sukses.
   - Memverifikasi record terhapus dan halaman kembali ke empty state.
+  - Menambahkan lima automated test untuk empty state, Create, halaman edit, Update, dan Delete.
 - Files created/modified:
   - `app/__init__.py` dan `app/models.py` (created/updated)
   - `.gitignore`, `task_plan.md`, dan `progress.md` (updated)
@@ -107,6 +108,7 @@
 | Create feature smoke test | POST judul dan deskripsi valid | Record tersimpan, redirect sukses, dan task tampil | Sesuai harapan | Pass |
 | Update feature smoke test | Edit judul, catatan, dan status | Record lama diperbarui menjadi nilai baru | Sesuai harapan | Pass |
 | Delete feature smoke test | Hapus satu record | Record hilang dan empty state tampil | Sesuai harapan | Pass |
+| Automated CRUD tests | `pytest -q` | Minimal lima test lulus | 5 passed in 0.88s | Pass |
 
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |
