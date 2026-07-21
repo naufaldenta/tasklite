@@ -80,8 +80,11 @@
   - Membuat skeleton Flask dan memulai virtual environment untuk smoke test.
   - Mengunci dependency, memverifikasi seluruh paket terpasang, dan menjalankan smoke test route dasar dengan hasil lulus.
   - Merapikan blank line ekstra yang ditemukan pemeriksaan whitespace Git.
+  - Menambahkan konfigurasi database berbasis environment, fallback SQLite lokal, dan model `Task`.
+  - Memverifikasi pembuatan tabel serta insert/read record pada SQLite in-memory.
 - Files created/modified:
-  - `task_plan.md` dan `progress.md` (updated)
+  - `app/__init__.py` dan `app/models.py` (created/updated)
+  - `.gitignore`, `task_plan.md`, dan `progress.md` (updated)
 
 ## Test Results
 | Test | Input | Expected | Actual | Status |
@@ -91,6 +94,7 @@
 | Planning requirement audit | 10 kelompok persyaratan | Semua tersedia dalam rencana | 10/10 lulus | Pass |
 | Git workflow revision audit | 9 aturan | Commit/push, CRUD terpisah, prefix, keamanan, dan CI tercakup | 9/9 lulus | Pass |
 | Flask skeleton smoke test | `GET /` | HTTP 200 dan teks `TaskLite siap` | Sesuai harapan | Pass |
+| Database smoke test | SQLite in-memory + model `Task` | Tabel terbentuk dan record dapat disimpan/dibaca | Sesuai harapan | Pass |
 
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |

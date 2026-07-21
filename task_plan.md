@@ -48,7 +48,7 @@ Phase 7
 
 ### Phase 7: Implementasi Aplikasi TaskLite
 - [x] Buat struktur Flask dan konfigurasi dependency
-- [ ] Implementasikan model serta koneksi database
+- [x] Implementasikan model serta koneksi database
 - [ ] Implementasikan Read, Create, Update, dan Delete sebagai checkpoint terpisah
 - [ ] Tambahkan validasi dan health endpoint
 - [ ] Tambahkan automated test minimal lima kasus
