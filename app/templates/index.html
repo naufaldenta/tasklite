@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Daftar Tugas · TaskLite{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Dashboard tugas</p>
+      <h1>Yang perlu kamu selesaikan.</h1>
+      <p class="hero-copy">Satu tempat sederhana buat nyatet dan mantau tugas.</p>
+    </div>
+    <div class="task-count" aria-label="Jumlah tugas">
+      <strong>{{ tasks|length }}</strong>
+      <span>total tugas</span>
+    </div>
+  </section>
+
+  <section class="task-section" aria-labelledby="task-list-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Daftar terbaru</p>
+        <h2 id="task-list-title">Tugas kamu</h2>
+      </div>
+    </div>
+
+    {% if tasks %}
+      <div class="task-list">
+        {% for task in tasks %}
+          <article class="task-card">
+            <div class="task-card-main">
+              <div class="task-meta">
+                <span class="status status-{{ task.status }}">
+                  {{ "Selesai" if task.status == "done" else "Belum selesai" }}
+                </span>
+                <time datetime="{{ task.created_at.isoformat() }}">
+                  {{ task.created_at.strftime("%d-%m-%Y %H:%M") }}
+                </time>
+              </div>
+              <h3>{{ task.title }}</h3>
+              {% if task.description %}
+                <p>{{ task.description }}</p>
+              {% else %}
+                <p class="muted">Tidak ada catatan tambahan.</p>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <span class="empty-icon" aria-hidden="true">✓</span>
+        <h3>Belum ada tugas</h3>
+        <p>Daftar tugas masih kosong. Nanti tugas baru bakal muncul di sini.</p>
+      </div>
+    {% endif %}
+  </section>
+{% endblock %}

@@ -42,8 +42,8 @@ def create_app(test_config=None):
     with app.app_context():
         db.create_all()
 
-    @app.get("/")
-    def index():
-        return "TaskLite siap"
+    from app.routes import bp
+
+    app.register_blueprint(bp)
 
     return app
