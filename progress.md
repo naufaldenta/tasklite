@@ -79,6 +79,7 @@
   - Memverifikasi versi dependency utama melalui PyPI resmi.
   - Membuat skeleton Flask dan memulai virtual environment untuk smoke test.
   - Mengunci dependency, memverifikasi seluruh paket terpasang, dan menjalankan smoke test route dasar dengan hasil lulus.
+  - Merapikan blank line ekstra yang ditemukan pemeriksaan whitespace Git.
 - Files created/modified:
   - `task_plan.md` dan `progress.md` (updated)
 
@@ -104,6 +105,7 @@
 | 2026-07-21 | `docker` tidak ditemukan | 1 | Lanjutkan unit test dengan virtual environment dan tunda uji Compose runtime sampai Docker terpasang |
 | 2026-07-21 | Instalasi dependency `.venv` timeout setelah 120 detik | 1 | Paket sudah lengkap; smoke test dipisahkan dan lulus |
 | 2026-07-21 | Patch log gagal karena konteks Phase 7 tidak cocok | 1 | Membaca konteks aktual lalu menerapkan patch terarah |
+| 2026-07-21 | Empat file awal memiliki blank line ekstra di EOF | 1 | Menghapus baris ekstra dan menjalankan ulang `git diff --check` |
 
 ## 5-Question Reboot Check
 | Question | Answer |

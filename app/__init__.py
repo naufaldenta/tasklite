@@ -16,4 +16,3 @@ def create_app(test_config=None):
         return "TaskLite siap"
 
     return app
-
