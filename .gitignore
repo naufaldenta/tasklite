@@ -1,0 +1,12 @@
+# Local secrets
+.env
+
+# Document review artifacts generated during planning
+_docx_review/
+
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
