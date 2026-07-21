@@ -3,6 +3,7 @@
 {% block title %}Daftar Tugas · TaskLite{% endblock %}
 
 {% block content %}
+  {% set entered = form_data|default({}) %}
   <section class="hero">
     <div>
       <p class="eyebrow">Dashboard tugas</p>
@@ -24,6 +25,9 @@
   {% if request.args.get("deleted") %}
     <div class="notice" role="status">Tugas berhasil dihapus.</div>
   {% endif %}
+  {% if form_error %}
+    <div class="notice notice-error" role="alert">{{ form_error }}</div>
+  {% endif %}
 
   <section class="create-panel" aria-labelledby="create-title">
     <div class="form-intro">
@@ -41,6 +45,7 @@
         minlength="3"
         maxlength="100"
         placeholder="Contoh: Belajar Docker Compose"
+        value="{{ entered.get('title', '') }}"
         required
       >
 
@@ -51,7 +56,7 @@
         maxlength="500"
         rows="3"
         placeholder="Tambahin detail singkat biar nggak lupa."
-      ></textarea>
+      >{{ entered.get('description', '') }}</textarea>
 
       <button class="button button-primary" type="submit">Tambah tugas</button>
     </form>

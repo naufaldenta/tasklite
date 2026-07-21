@@ -154,6 +154,16 @@ h1 {
   font-weight: 700;
 }
 
+.notice-error {
+  border-color: #f0bcbc;
+  color: #8e2424;
+  background: #fff0f0;
+}
+
+.task-form .notice {
+  margin-bottom: 4px;
+}
+
 .create-panel {
   display: grid;
   grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);

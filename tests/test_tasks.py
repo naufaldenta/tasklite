@@ -50,6 +50,18 @@ def test_create_rejects_blank_title(client, app):
         assert db.session.execute(db.select(Task)).scalars().all() == []
 
 
+def test_create_rejects_long_description(client, app):
+    response = client.post(
+        "/tasks",
+        data={"title": "Judul valid", "description": "x" * 501},
+    )
+
+    assert response.status_code == 400
+    assert b"Catatan maksimal 500 karakter" in response.data
+    with app.app_context():
+        assert db.session.execute(db.select(Task)).scalars().all() == []
+
+
 def test_edit_page_shows_existing_task(client, app):
     task_id = add_task(app, title="Judul lama")
 
@@ -74,6 +86,22 @@ def test_update_task(client, app):
         task = db.session.get(Task, task_id)
         assert task.title == "Belajar Compose"
         assert task.status == "done"
+
+
+def test_update_rejects_invalid_status(client, app):
+    task_id = add_task(app, title="Judul aman")
+
+    response = client.post(
+        f"/tasks/{task_id}/update",
+        data={"title": "Judul berubah", "description": "", "status": "invalid"},
+    )
+
+    assert response.status_code == 400
+    assert b"Status tugas tidak valid" in response.data
+    with app.app_context():
+        task = db.session.get(Task, task_id)
+        assert task.title == "Judul aman"
+        assert task.status == "pending"
 
 
 def test_delete_task(client, app):

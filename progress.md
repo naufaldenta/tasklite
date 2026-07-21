@@ -106,6 +106,9 @@
   - Memperjelas interpreter/target test dan mengamankan step log serta cleanup ketika `.env` belum tersedia.
   - Memverifikasi retry CI `29831059597` berhasil pada seluruh step, termasuk Docker build dan smoke test multi-container.
   - Menambahkan test server-side judul kosong sebelum implementasi validasi sebagai kegagalan terkontrol UAS.
+  - Memverifikasi run GitHub Actions `29831220206` gagal sesuai rencana pada test judul kosong.
+  - Mengimplementasikan validasi server untuk judul, panjang deskripsi, dan whitelist status dengan HTTP 400.
+  - Menjaga nilai input tetap tampil ketika validasi gagal serta menambah dua test validasi tambahan.
 - Files created/modified:
   - `app/__init__.py` dan `app/models.py` (created/updated)
   - `.gitignore`, `task_plan.md`, dan `progress.md` (updated)
@@ -135,6 +138,8 @@
 | Regression before CI push | `pytest -q` | Semua test lulus | 6 passed in 0.91s | Pass |
 | CI baseline success | Run `29831059597` | Test, build, Compose, smoke test, dan cleanup berhasil | Semua step success | Pass |
 | Controlled validation failure | POST judul spasi | Test mengharapkan 400 sebelum validasi ada | 302 diterima; 1 failed, 6 passed | Expected fail |
+| Controlled GitHub Actions failure | Run `29831220206` | Pipeline gagal pada test validasi | Conclusion failure | Expected fail |
+| Validation fix tests | `pytest -q` | Seluruh CRUD, health, dan validasi lulus | 9 passed in 1.50s | Pass |
 
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |

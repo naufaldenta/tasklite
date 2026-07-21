@@ -3,6 +3,7 @@
 {% block title %}Edit Tugas · TaskLite{% endblock %}
 
 {% block content %}
+  {% set entered = form_data|default({}) %}
   <section class="edit-shell">
     <div class="form-intro edit-intro">
       <p class="eyebrow">Update tugas</p>
@@ -15,6 +16,10 @@
       action="{{ url_for('tasks.update_task', task_id=task.id) }}"
       method="post"
     >
+      {% if form_error %}
+        <div class="notice notice-error" role="alert">{{ form_error }}</div>
+      {% endif %}
+
       <label for="title">Judul tugas</label>
       <input
         id="title"
@@ -22,17 +27,18 @@
         type="text"
         minlength="3"
         maxlength="100"
-        value="{{ task.title }}"
+        value="{{ entered.get('title', task.title) }}"
         required
       >
 
       <label for="description">Catatan <span>(opsional)</span></label>
-      <textarea id="description" name="description" maxlength="500" rows="5">{{ task.description or "" }}</textarea>
+      <textarea id="description" name="description" maxlength="500" rows="5">{{ entered.get('description', task.description or '') }}</textarea>
 
       <label for="status">Status</label>
       <select id="status" name="status">
-        <option value="pending" {% if task.status == "pending" %}selected{% endif %}>Belum selesai</option>
-        <option value="done" {% if task.status == "done" %}selected{% endif %}>Selesai</option>
+        {% set selected_status = entered.get('status', task.status) %}
+        <option value="pending" {% if selected_status == "pending" %}selected{% endif %}>Belum selesai</option>
+        <option value="done" {% if selected_status == "done" %}selected{% endif %}>Selesai</option>
       </select>
 
       <div class="form-actions">

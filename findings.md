@@ -30,6 +30,7 @@
 - Runtime Python 3.12.13 tersedia untuk menjalankan test lewat virtual environment lokal sementara.
 - Dependency terkunci dan berhasil terpasang: Flask 3.1.3, Flask-SQLAlchemy 3.1.1, Psycopg 3.3.4, Gunicorn 26.0.0, dan pytest 9.1.1.
 - Release resmi saat implementasi menunjukkan `actions/checkout@v6` dan `actions/setup-python@v6` sebagai major version terkini; workflow memakai permission minimum `contents: read`.
+- Bukti CI: baseline hijau pada run `29831059597`; kegagalan validasi terkontrol pada run `29831220206` setelah test membuktikan server menerima judul kosong.
 
 ## Technical Decisions
 | Decision | Rationale |

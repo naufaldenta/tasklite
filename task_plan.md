@@ -50,7 +50,7 @@ Phase 7
 - [x] Buat struktur Flask dan konfigurasi dependency
 - [x] Implementasikan model serta koneksi database
 - [x] Implementasikan Read, Create, Update, dan Delete sebagai checkpoint terpisah
-- [ ] Tambahkan validasi dan health endpoint (health selesai; validasi menunggu skenario CI gagal)
+- [x] Tambahkan validasi dan health endpoint
 - [x] Tambahkan automated test minimal lima kasus
 - [x] Buat Dockerfile, Compose, volume, network, env, dan health check
 - [ ] Buat GitHub Actions untuk test dan Docker build
